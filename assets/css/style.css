@@ -1,0 +1,14 @@
+#currentWord {
+    letter-spacing: 10px;
+}
+
+    body {
+        color: teal; 
+        background-color: gray;
+
+    }
+
+    header {
+        background-color: black;
+        color: bisque;
+    }
