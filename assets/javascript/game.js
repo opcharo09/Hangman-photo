@@ -52,6 +52,7 @@ var wordGuessGame = {
     totalGuesses: 0,
     letterGuessed: null,
     wins: 0,
+    losses: 0,
   
     setupGame: function() {
         

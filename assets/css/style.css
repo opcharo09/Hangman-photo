@@ -1,13 +1,20 @@
 #container {
-    position: relative;
+    position: absolute;
+    width: 100%;
+    max-width: 960;
     top: 250px;
     left: 555px;
     
 }
 
+body{
+    background-size: 100%;
+    
+}
+
 H1,h2{
     font-family:  "Permanent Marker", cursive;
-    font-size: 95px;
+    font-size: 65px;
     text-align: center
 }
 
@@ -43,45 +50,27 @@ div {
 #photo-div {
     width: 250px;
     padding: 20px;
-    margin-left: 10px;
+    margin-left: 90px;
+    margin-top: -100px;
    
 
 }
 
 img{
-    width: 450px;
-    height: 150px;
+    width: 250px;
+    height: 100px;
     border: 2px solid black;
     }
 
 #game-section {
     float: left;
     width: 500px;
-    height: 750;
+    height: 580px;
     padding: 40px;
-    margin-bottom: 150px;
     border: 10px dotted rgb(168, 144, 7);
     box-shadow: inset 0 -3 0 0 black, 0 3px 0 0 black;
     background: #000;
 }
 
-@media only screen and (max-width: 1190.px){
-    #container{
-        left: 100px;
-    }
 
-
-}
-
-@media only screen and (max-width: 980px){
-
-}
-
-@media only screen and (max-width: 768px){
-
-}
-
-@media only screen and (max-width: 640px){
-
-}
 
