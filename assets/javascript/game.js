@@ -1,136 +1,240 @@
+var wordGuessGame = {
 
-var startgame = function ("#press any key to get started!");
-//array of words
-var words = [
-    "film",
-    "digital",
-    "analog",
-    "lens",
-    "viewfinder",
-    "darkroom",
-    "chemicals",
-    "iso",
-    "aperture"
-];
-
-console.log("film");
-
-//pick random word
-var word = words[Math.floor(math.random()* words.length)];
-
-// letters array
-var lettters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
-"k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
-"x", "y", "z"];
-
-// lives
-const maxtries = 11;
-
-// array of 
-var guessingword = [];
-var wordindex ;
-var lettersguess = [];
-var remainingguesses;
-var gamestarted = false;
-var finished = false;
-var wins = 0;
- 
-
-
-for (var i = 0; i < words.length;i++){
-lettersguess[push] = ("_");
-}
-//when game starts again 
-function resetGame(){
-    remainingguesses = maxtries
-    gamestarted = false;
-}
-
-lettersguess = [];
-guessingword = [];
-
-var remainingletters = word.length
-
-document.getElementById("presskeytryagain")
-document.getElementById("gameover-image")
-document.getElementById("youwin-image")
-// to show on html
-function updatedisplay(){
-
-document.getElementById("wins").innerHTML = wins;
-    document.getElementById("currentword").innerText = "";
-    for (var i = 0; i < guessingWord.length; i++) {
-        document.getElementById("currentword").innerText += guessingWord[i];
-    }
-    document.getElementById("remainingguesses").innerText = remainingGuesses;
-    document.getElementById("letttersguess").innerText = lettersguess;
-    if(remainingGuesses <= 0) {
-        document.getElementById("gameover-image");
-        document.getElementById("presskeytryagain");
-        hasFinished = true;
-    }
-};
-
-var guess = prompt("Guess a letter, or click Cancel to stop playing.");
-if (guess === null) {
-}
-// user press key
-document.onkeydown = function(event) {
-    if(hasFinished){
-        resetGame();
-        hasFinished = false;
-    } 
-    else {if(event.keycode >=65 && event.keycode<=90){
-        makeguess(event.key.toLowerCase());
-    }
-}
-};
-
-function guessingWord(letter) {
-    var positions = [];
-}
+     wordsToPick: {
+      film: {
+        picture: "film.jpg",
+      },
+      digital: {
+        picture: "digital.jpg",
+       
+      },
+      lens: {
+        picture: "lens.jpg",
+      },
+      anolog: {
+        picture: "anolog.jpg",
+      },
+      viewfinder: {
+        picture: "viewfinder.jpg",
+       
+      },
+      ligthing: {
+        picture: "ligthing.jpg",
     
-for (var i = 0; i < Words[WordIndex].length; i++) {
-    if(Words[WordIndex][i] === letter) {
-        positions.push(i);
-        }
-    }
-
-if (positions.length <= 0) {
-        remainingGuesses--;
-    }
-for(var i = 0; i < positions.length; i++) {
-        guessingWord[positions[i]] = letter;
-    }
-
-
-    function makeGuess(letter) {
-        if (remainingGuesses > 0) {
-            if (!gameStarted) {
-                newFunction();
-            }
+      },
+      aperture: {
+        picture: "aperature.jpg",
     
-            
-            if (guessedLetters.indexOf(letter) === -1) {
-                guessedLetters.push(letter);
-                guessingWord(letter);
-            }
-        }
+      },
+      chemicals: {
+        picture: "",
         
-        updateDisplay();
-        Win();
-
-        function newFunction() {
-            gameStarted = true;
-        }
-    };
+      },
+      iso: {
+        picture: "iso.jpg",
+        
+      },
+      expopsure: {
+        picture: "exposure.jpg",
+        
+      },
+      focus: {
+        picture: "focus.jpg",
+      }
+    },
   
-    function Win() {
-        if(guessingWord.indexOf("_") === -1) {
-            document.getElementById("youwin-image");
-            document.getElementById("pressKeyTryAgain");
-            wins++;
-            hasFinished = true;
-        }
-    };
+    
+    wordInPlay: null,
+    lettersOfTheWord: [],
+    matchedLetters: [],
+    guessedLetters: [],
+    guessesLeft: 0,
+    totalGuesses: 0,
+    letterGuessed: null,
+    wins: 0,
+  
+    setupGame: function() {
+        
+    
+      
+      var objKeys = Object.keys(this.wordsToPick);
+      this.wordInPlay = objKeys[Math.floor(Math.random() * objKeys.length)];
+  
+      
+      this.lettersOfTheWord = this.wordInPlay.split("");
+      
+      this.rebuildWordView();
      
+      this.processUpdateTotalGuesses();
+    },
+  
+   
+    updatePage: function(letter) {
+   
+      if (this.guessesLeft === 0) {
+        this.restartGame();
+      }
+     
+      else {
+       
+        this.updateGuesses(letter);
+  
+        
+        this.updateMatchedLetters(letter);
+  
+      
+        this.rebuildWordView();
+  
+       
+        if (this.updateWins() === true) {
+          this.restartGame();
+        }
+      }
+  
+    },
+  
+    updateGuesses: function(letter) {
+     
+      if ((this.guessedLetters.indexOf(letter) === -1) && (this.lettersOfTheWord.indexOf(letter) === -1)) {
+  
+        
+        this.guessedLetters.push(letter);
+  
+       
+        this.guessesLeft--;
+  
+       
+        document.querySelector("#guesses-remaining").innerHTML = this.guessesLeft;
+        document.querySelector("#guessed-letters").innerHTML =
+        this.guessedLetters.join(", ");
+      }
+    },
+  
+   
+    processUpdateTotalGuesses: function() {
+      
+      this.totalGuesses = this.lettersOfTheWord.length + 5;
+      this.guessesLeft = this.totalGuesses;
+  
+      
+      document.querySelector("#guesses-remaining").innerHTML = this.guessesLeft;
+    },
+  
+   
+    updateMatchedLetters: function(letter) {
+      
+      for (var i = 0; i < this.lettersOfTheWord.length; i++) {
+        
+        if ((letter === this.lettersOfTheWord[i]) && (this.matchedLetters.indexOf(letter) === -1)) {
+         
+          this.matchedLetters.push(letter);
+        }
+      }
+    },
+  
+    
+    rebuildWordView: function() {
+     
+      var wordView = "";
+  
+     
+      for (var i = 0; i < this.lettersOfTheWord.length; i++) {
+       
+        if (this.matchedLetters.indexOf(this.lettersOfTheWord[i]) !== -1) {
+          wordView += this.lettersOfTheWord[i];
+        }
+      
+        else {
+          wordView += "&nbsp;_&nbsp;";
+        }
+      }
+  
+      
+      document.querySelector("#current-word").innerHTML = wordView;
+    },
+  
+    
+    restartGame: function() {
+      document.querySelector("#guessed-letters").innerHTML = "";
+      this.wordInPlay = null;
+      this.lettersOfTheWord = [];
+      this.matchedLetters = [];
+      this.guessedLetters = [];
+      this.guessesLeft = 0;
+      this.totalGuesses = 0;
+      this.letterGuessed = null;
+      this.setupGame();
+      this.rebuildWordView();
+    },
+  
+    
+    updateWins: function() {
+      var win;
+  
+      if (this.matchedLetters.length === 0) {
+        win = false;
+      }
+     
+      else {
+        win = true;
+      }
+  
+    
+      for (var i = 0; i < this.lettersOfTheWord.length; i++) {
+        if (this.matchedLetters.indexOf(this.lettersOfTheWord[i]) === -1) {
+          win = false;
+        }
+      }
+  
+     
+      if (win) {
+  
+      
+        this.wins = this.wins + 1;
+  
+      
+        document.querySelector("#wins").innerHTML = this.wins;
+      
+  
+    
+        document.querySelector("#music").innerHTML = this.wordsToPick[this.wordInPlay].song +
+        " By " + this.wordInPlay;
+  
+    
+        document.querySelector("#photo-div").innerHTML =
+          "<img class='photo-image' src='../images/" +
+          this.wordsToPick[this.wordInPlay].picture + "' alt='" +
+          this.wordsToPick[this.wordInPlay].song + "'>";
+  
+       
+        var audio = new Audio(this.wordsToPick[this.wordInPlay].preview);
+        audio.play();
+  
+        
+        return true;
+      }
+     
+      return false;
+    }
+  };
+  
+  
+ 
+  wordGuessGame.setupGame();
+  
+
+  document.onkeyup = function(event) {
+   
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+      
+      wordGuessGame.letterGuessed = event.key.toLowerCase();
+      
+      wordGuessGame.updatePage(wordGuessGame.letterGuessed);
+    }
+    
+  };
+
+
+
+
+

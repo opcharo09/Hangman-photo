@@ -1,14 +1,87 @@
-#currentWord {
-    letter-spacing: 10px;
+#container {
+    position: relative;
+    top: 250px;
+    left: 555px;
+    
 }
 
-    body {
-        color: teal; 
-        background-color: gray;
+H1,h2{
+    font-family:  "Permanent Marker", cursive;
+    font-size: 95px;
+    text-align: center
+}
 
+h3 {
+    font-size: 35px;
+   color: whitesmoke;
+}
+p{
+    color: whitesmoke;
+    font-size: 25px;
+}
+#wins{
+    color: darkgreen;
+}
+
+#current-word{
+    color: khaki;
+    font-size: 25px;
+}
+
+#guesses-remaining{
+    color: aqua;
+    font-size: 25px;
+}
+#guessed-letters{
+    color: red;
+    font-size: 25;
+}
+div {
+    text-align: center;
+}
+
+#photo-div {
+    width: 250px;
+    padding: 20px;
+    margin-left: 10px;
+   
+
+}
+
+img{
+    width: 450px;
+    height: 150px;
+    border: 2px solid black;
     }
 
-    header {
-        background-color: black;
-        color: bisque;
+#game-section {
+    float: left;
+    width: 500px;
+    height: 750;
+    padding: 40px;
+    margin-bottom: 150px;
+    border: 10px dotted rgb(168, 144, 7);
+    box-shadow: inset 0 -3 0 0 black, 0 3px 0 0 black;
+    background: #000;
+}
+
+@media only screen and (max-width: 1190.px){
+    #container{
+        left: 100px;
     }
+
+
+}
+
+@media only screen and (max-width: 980px){
+
+}
+
+@media only screen and (max-width: 768px){
+
+}
+
+@media only screen and (max-width: 640px){
+
+}
+
